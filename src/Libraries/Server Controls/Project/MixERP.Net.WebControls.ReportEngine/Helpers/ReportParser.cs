@@ -1,23 +1,4 @@
-﻿/********************************************************************************
-Copyright (C) MixERP Inc. (http://mixof.org).
-
-This file is part of MixERP.
-
-MixERP is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, version 2 of the License.
-
-
-MixERP is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with MixERP.  If not, see <http://www.gnu.org/licenses/>.
-***********************************************************************************/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -31,6 +12,7 @@ using MixERP.Net.ApplicationState.Cache;
 using MixERP.Net.Common;
 using MixERP.Net.Common.Helpers;
 using MixERP.Net.Framework;
+using MixERP.Net.Framework.Extensions;
 using MixERP.Net.i18n;
 
 namespace MixERP.Net.WebControls.ReportEngine.Helpers
@@ -65,7 +47,19 @@ namespace MixERP.Net.WebControls.ReportEngine.Helpers
                         {
                             if (table[index].Columns.Contains(column))
                             {
-                                string value = table[index].Rows[0][column].ToString();
+                                object columnValue = table[index].Rows[0][column];
+
+                                string value;
+
+                                if (columnValue is decimal)
+                                {
+                                    value = columnValue.To<decimal>().ToString("N2");
+                                }
+                                else
+                                {
+                                    value = Regex.Replace(columnValue.ToString(), @"\r\n?|\n", "<br />", RegexOptions.Compiled);
+                                }
+
                                 expression = expression.Replace(word, value);
                             }
                         }
@@ -187,7 +181,7 @@ namespace MixERP.Net.WebControls.ReportEngine.Helpers
                         {
                             expression = expression.Replace(word,
                                 GetSum(dataTableCollection[dataSourceIndex], index)
-                                    .ToString(CultureInfo.InvariantCulture));
+                                    .ToString("N2"));
                         }
                     }
                 }

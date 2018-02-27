@@ -1,23 +1,4 @@
-﻿/********************************************************************************
-Copyright (C) MixERP Inc. (http://mixof.org).
-
-This file is part of MixERP.
-
-MixERP is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, version 2 of the License.
-
-
-MixERP is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with MixERP.  If not, see <http://www.gnu.org/licenses/>.
-***********************************************************************************/
-
-using System.Web.UI.HtmlControls;
+﻿using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using MixERP.Net.Common.Helpers;
 using MixERP.Net.i18n.Resources;
@@ -63,7 +44,7 @@ namespace MixERP.Net.WebControls.ReportEngine
             this.emailImageButton = new LinkButton();
             this.emailImageButton.ID = "SendEmailImageButton";
             this.emailImageButton.CssClass = this.GetImageButtonCssClass();
-            this.emailImageButton.Text = "<i class='fa fa-envelope-o'></i>";
+            this.emailImageButton.Text = "<i class='mail icon'></i>";
 
             this.emailImageButton.OnClientClick = "return updateReportHidden();";
             this.emailImageButton.ToolTip = Titles.Email;
@@ -77,7 +58,7 @@ namespace MixERP.Net.WebControls.ReportEngine
             this.wordLinkButton = new LinkButton();
             this.wordLinkButton.ID = "WordAnchor";
             this.wordLinkButton.CssClass = this.GetImageButtonCssClass();
-            this.wordLinkButton.Text = "<i class='fa fa-file-word-o'></i>";
+            this.wordLinkButton.Text = "<i class='file word outline icon'></i>";
 
             this.wordLinkButton.OnClientClick = "return updateReportHidden();";
             this.wordLinkButton.ToolTip = Titles.ExportToDoc;
@@ -96,7 +77,7 @@ namespace MixERP.Net.WebControls.ReportEngine
             this.excelLinkButton = new LinkButton();
             this.excelLinkButton.ID = "ExcelAnchor";
             this.excelLinkButton.CssClass = this.GetImageButtonCssClass();
-            this.excelLinkButton.Text = "<i class='fa fa-file-excel-o'></i>";
+            this.excelLinkButton.Text = "<i class='file excel outline icon'></i>";
 
             this.excelLinkButton.OnClientClick = "return updateReportHidden();";
             this.excelLinkButton.ToolTip = Titles.ExportToExcel;
@@ -115,7 +96,7 @@ namespace MixERP.Net.WebControls.ReportEngine
             this.pdfLinkButton = new LinkButton();
             this.pdfLinkButton.ID = "PdfAnchor";
             this.pdfLinkButton.CssClass = this.GetImageButtonCssClass();
-            this.pdfLinkButton.Text = "<i class='fa fa-file-pdf-o'></i>";
+            this.pdfLinkButton.Text = "<i class='file pdf outline icon'></i>";
 
             this.pdfLinkButton.OnClientClick = "return updateReportHiddenPdf();";
             this.pdfLinkButton.ToolTip = Titles.ExportToPDF;
@@ -137,7 +118,7 @@ namespace MixERP.Net.WebControls.ReportEngine
             this.printAnchor.Attributes.Add("onclick", "javascript:window.print();");
             this.printAnchor.Title = Titles.Print;
 
-            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("fa fa-print"))
+            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("print icon"))
             {
                 this.printAnchor.Controls.Add(i);
             }
@@ -153,7 +134,7 @@ namespace MixERP.Net.WebControls.ReportEngine
             this.goTopAnchor.Attributes.Add("onclick", "window.scrollTo(0, 0);");
             this.goTopAnchor.Title = Titles.GoToTop;
 
-            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("fa fa-arrow-up"))
+            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("arrow up icon"))
             {
                 this.goTopAnchor.Controls.Add(i);
             }
@@ -170,7 +151,7 @@ namespace MixERP.Net.WebControls.ReportEngine
             this.goBottomAnchor.Attributes.Add("onclick", "window.scrollTo(0,document.body.scrollHeight);");
             this.goBottomAnchor.Title = Titles.GoToBottom;
 
-            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("fa fa-arrow-down"))
+            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("arrow down icon"))
             {
                 this.goBottomAnchor.Controls.Add(i);
             }
@@ -188,7 +169,7 @@ namespace MixERP.Net.WebControls.ReportEngine
             this.filterAnchor.Title = Titles.Filter;
 
 
-            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("fa fa-filter"))
+            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("filter icon"))
             {
                 this.filterAnchor.Controls.Add(i);
             }
@@ -206,7 +187,7 @@ namespace MixERP.Net.WebControls.ReportEngine
             this.closeImageButton.Title = Titles.Close;
 
 
-            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("fa fa-close"))
+            using (HtmlGenericControl i = HtmlControlHelper.GetIcon("close icon"))
             {
                 this.closeImageButton.Controls.Add(i);
             }

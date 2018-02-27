@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using MixERP.Net.Framework;
+using MixERP.Net.i18n;
 using MixERP.Net.i18n.Resources;
 using Npgsql;
 
@@ -28,7 +29,7 @@ namespace PetaPoco
                     throw new MixERPException(errorMessage, ex);
                 }
 
-                throw;
+                throw new MixERPException(ex.Message, ex);
             }
         }
 
@@ -49,11 +50,11 @@ namespace PetaPoco
                     throw new MixERPException(errorMessage, ex);
                 }
 
-                throw;
+                throw new MixERPException(ex.Message, ex);
             }
         }
 
-        public static object Insert(string catalog, object poco, string tableName = "", string primaryKeyName = "")
+        public static object Insert(string catalog, object poco, string tableName = "", string primaryKeyName = "", bool autoIncrement = true)
         {
             try
             {
@@ -61,7 +62,7 @@ namespace PetaPoco
                 {
                     if (!string.IsNullOrWhiteSpace(tableName) && !string.IsNullOrWhiteSpace(primaryKeyName))
                     {
-                        return db.Insert(tableName, primaryKeyName, poco);
+                        return db.Insert(tableName, primaryKeyName, autoIncrement, poco);
                     }
 
                     return db.Insert(poco);
@@ -75,7 +76,7 @@ namespace PetaPoco
                     throw new MixERPException(errorMessage, ex);
                 }
 
-                throw;
+                throw new MixERPException(ex.Message, ex);
             }
         }
 
@@ -101,7 +102,7 @@ namespace PetaPoco
                     throw new MixERPException(errorMessage, ex);
                 }
 
-                throw;
+                throw new MixERPException(ex.Message, ex);
             }
         }
 
@@ -122,7 +123,7 @@ namespace PetaPoco
                     throw new MixERPException(errorMessage, ex);
                 }
 
-                throw;
+                throw new MixERPException(ex.Message, ex);
             }
         }
 
@@ -143,7 +144,7 @@ namespace PetaPoco
                     throw new MixERPException(errorMessage, ex);
                 }
 
-                throw;
+                throw new MixERPException(ex.Message, ex);
             }
         }
 
@@ -164,15 +165,15 @@ namespace PetaPoco
                     throw new MixERPException(errorMessage, ex);
                 }
 
-                throw;
+                throw new MixERPException(ex.Message, ex);
             }
         }
 
         public static string GetDBErrorResource(NpgsqlException ex)
         {
-            string message = DbErrors.Get(ex.Code);
+            string message = ResourceManager.TryGetResourceFromCache("DbErrors", ex.Code);
 
-            if (message == ex.Code)
+            if (string.IsNullOrWhiteSpace(message) || message == ex.Code)
             {
                 return ex.Message;
             }

@@ -1,22 +1,4 @@
-﻿/********************************************************************************
-Copyright (C) MixERP Inc. (http://mixof.org).
-
-This file is part of MixERP.
-
-MixERP is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, version 2 of the License.
-
-MixERP is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with MixERP.  If not, see <http://www.gnu.org/licenses/>.
-***********************************************************************************/
-
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
 using System.Web;
@@ -47,22 +29,32 @@ namespace MixERP.Net.Common.Helpers
             return destination;
         }
 
-        public static string CreateExcel(string html)
+        public static string CreateExcel(string html, string documentName = "")
         {
-            string id = Guid.NewGuid().ToString();
+            string id = Guid.NewGuid() + ".xls";
+
+            if (!string.IsNullOrWhiteSpace(documentName))
+            {
+                id = documentName;
+            }
 
             //public directory is allowed direct access
-            string source = "~/Resource/Temp/Public/" + id + ".xls";
+            string source = "~/Resource/Temp/Public/" + id;
             WriteHtml(source, html);
             return HostingEnvironment.MapPath(source);
         }
 
-        public static string CreateWord(string html)
+        public static string CreateWord(string html, string documentName = "")
         {
-            string id = Guid.NewGuid().ToString();
+            string id = Guid.NewGuid() + ".doc";
+
+            if (!string.IsNullOrWhiteSpace(documentName))
+            {
+                id = documentName;
+            }
 
             //public directory is allowed direct access
-            string source = "~/Resource/Temp/Public/" + id + ".doc";
+            string source = "~/Resource/Temp/Public/" + id;
             WriteHtml(source, html);
             return HostingEnvironment.MapPath(source);
         }

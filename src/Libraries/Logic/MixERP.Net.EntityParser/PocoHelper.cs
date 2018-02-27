@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using MixERP.Net.Entities.Contracts;
 using MixERP.Net.Framework.Extensions;
 using PetaPoco;
 
@@ -59,6 +58,24 @@ namespace MixERP.Net.EntityParser
             }
 
             return false;
+        }
+
+        public static string GetColumnName<T>(T poco, string propertyName)
+        {
+            var type = poco.GetType();
+
+            var a = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .FirstOrDefault(p => p.Name.Equals(propertyName));
+
+            var attr = a?.GetCustomAttributes(typeof (ColumnAttribute), false)
+                .Cast<ColumnAttribute>().FirstOrDefault();
+
+            if (attr != null)
+            {
+                return attr.Name;
+            }
+
+            return string.Empty;
         }
     }
 }

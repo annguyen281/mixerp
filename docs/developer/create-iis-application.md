@@ -18,10 +18,10 @@ MixERPDevelopment
 The location where you cloned MixERP source code to.
 
 <code>
-    path-to-source\src\FrontEnd\MixERP.Net.FrontEnd
+    path-to-source\src\FrontEnd
 </code>
 
-**Example**: C:\users\nirvan\Desktop\mixerp\src\FrontEnd\MixERP.Net.FrontEnd
+**Example**: C:\users\nirvan\Desktop\mixerp\src\FrontEnd
 
 ### Port
 
@@ -45,7 +45,7 @@ Provide the following users **modify** permission on the location where you clon
   ![Directory Permission](images/directory-permission.png)
 * Click OK.
 
-## Complie MixERP
+## Compile MixERP
 
 Open the solution in Visual Studio and perform a rebuild.
 
